@@ -1,0 +1,31 @@
+
+
+
+
+#navbar1{
+    background-color: yellow;
+}
+
+th {
+    background-color: goldenrod;
+}
+
+tr:nth-child(even) {
+    background-color: lightgoldenrodyellow;
+}
+
+tr:nth-child(odd) {
+    background-color: lightpink;
+}
+
+.exam-form{
+    /* border: 2px solid white; */
+   
+    height: 50vh;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    margin: 0 36px;
+    /* border-radius: 10px; */
+    /* box-shadow: 5px 10px 18px rgb(148, 141, 141); */
+}

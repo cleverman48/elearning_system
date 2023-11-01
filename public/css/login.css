@@ -1,0 +1,84 @@
+.container {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.rowSection {
+    display: flex;
+    flex-direction: row-reverse;
+    box-shadow: 1px 1px 5px black;
+    margin: 50px;
+    width:80%;
+}
+
+.columnF {
+    width: 50%;
+}
+
+.columnS {
+    width: 100%;
+}
+
+.allInputDiv {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px;
+}
+
+.boxRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.passDivRember {
+    width: 55%;
+}
+
+.passDivForget {
+    width: 45%;
+    display: flex;
+    justify-content: end;
+}
+
+.allInputDiv {
+    padding-top: 100px;
+}
+
+.titleCenter {
+    text-align: center;
+}
+
+.titleCenter h3 {
+    font-size: 40px;
+}
+.nav
+{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+.nav-link
+{
+    font-size: 15px;
+    color:black;
+}
+.nav-link:active  
+{
+    color:red;
+}
+.nav-link:hover
+{
+    color:red;
+}
+footer
+{
+    display: block;
+
+    font-size: 20px;
+    text-align: center;
+}
+footer div {
+    width:100vw;
+    text-align: center;
+}

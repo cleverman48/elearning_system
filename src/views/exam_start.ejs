@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Start</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/home.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="main_exam">
+        <header>
+            <nav class="navbar navbar-expand-lg bg-warning">
+                <div class="container-fluid">
+                    <!-- <img src="/exam_logo.jpg" class="img-circle" alt="logo"> -->
+                    <h2 class="h2">Online Exam System</h2>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="d-flex justify-content-between " id="navbarNav">
+                        <ul class="navbar-nav d-flex justify-content-between ">
+                            <li class="nav-item">
+
+                                <h2 class="h2">User name</h2>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <section class="exam_body">
+            <div class="container_fluid">
+
+                <div class="row">
+                    <div class="col-6 col-md-8 border">
+                        <div class="container border">
+                            <button class="btn btn-primary" id="save_id">Save</button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 border">
+                        <div class="container mt-4 mb-4 border p-3 ">
+                            <h2 class="h2">Questions</h2>
+                            <div class="grid border d-flex flex-wrap gap-50 ">
+                                <% if(exam_que.length){ %>
+                                    <%for(let i=0;i<exam_que.length;i++){ %>
+                                        <a href="#" class="t-30px padd-4 d-flex justify-content-center align-items-center border m-2 btn bg-aqva" id="<%=exam_que[i].question_id %>">
+                                            <%=exam_que[i].question_id %>
+                                        </a>
+                                        <%}}%>
+
+                                            <div class="container d-flex flex-column border mt-5 p-3 m-2">
+                                                <div class="p-2 d-flex gap-20 ">
+                                                    <div class="bg-success padd-2  btn"></div>
+                                                    <p class="t-30px">Saved</p>
+                                                </div>
+                                                <div class="p-2 d-flex gap-20 ">
+                                                    <div class="bg-aqva padd-2 btn"></div>
+                                                    <p class="t-30px">Remaining</p>
+                                                </div>
+                                                <div class="p-2 d-flex gap-20 ">
+                                                    <div class="bg-primary padd-2 btn"></div>
+                                                    <p class="t-30px">Current Question</p>
+                                                </div>
+                                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        let save_arr = [];
+
+        const inputs = document.querySelectorAll('.padd-4');
+        let flag = 1;
+        let arr = [];
+        for (let i = 0; i < inputs.length; i++) {
+            arr.push(parseInt(inputs[i].id))
+
+            inputs[i].addEventListener('click', async(ele) => {
+
+                const id = ele.target.id;
+                arr.forEach(element => {
+                    if (element == parseInt(id))
+                        document.getElementById(element).style.backgroundColor = '#0d6efd';
+                    else
+                        document.getElementById(element).style.backgroundColor = 'rgb(232, 237, 241)';
+                });
+            })
+        }
+    </script>
+</body>
+
+</html>

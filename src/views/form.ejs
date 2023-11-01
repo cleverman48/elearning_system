@@ -1,0 +1,145 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+    <link rel="stylesheet" href="/css/form.css" type="text/css" />
+    <link rel="stylesheet" href="/css/home.css" type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
+
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+    <div class="sitepage">
+        <header>
+            <nav class="navbar navbar-expand-lg" id="navbar1">
+                <div class="container-fluid">
+                    <a class="navbar-brand">User Details</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+        </header>
+        <div class="bodypage">
+            <section class="section1">
+                <div class="container">
+                    <center>
+                        <div class="exam_form">
+                            <form action="/" method="post">
+                                <div class="form-input">
+                                    <input type="text" name="fname" class="form-control" id="fname" placeholder="First Name" value="<%=result.name%>" readonly />
+                                    <p id="err_name"></p>
+                                </div>
+                                <div class="form-input">
+                                    <input type="text" name="city" class="form-control" id="city" placeholder="City" value="<%=result.city%>" readonly />
+                                    <p id="err_name1"></p>
+                                </div>
+                                <div class="form-input">
+                                    <input type="text" name="email" class="form-control" id="email" placeholder="Email" value="<%=result.email%>" readonly />
+                                    <p id="emal_id"></p>
+                                </div>
+                                <div class="form-input">
+                                    <input type="text" name="contact" class="form-control" id="contact" placeholder="Contact" value="<%=result.contact%>" readonly />
+                                    <p id="err_contact"></p>
+                                </div>
+                                <div class="form-input">
+                                    <input type="text" name="gender" class="form-control" id="gender" placeholder="Gender" value="<%=result.gender%>" readonly />
+                                    <p id="err_gender"></p>
+                                </div>
+                                <div class="form-input">
+                                    <input type="text" name="college" class="form-control" id="college" placeholder="College" value="<%=result.college_name%>" readonly />
+                                    <p id="err_college"></p>
+                                </div>
+                                <div class="form-input">
+                                    <input type="text" name="access" class="form-control" id="access" placeholder="Access Code" onchange="validateCode()" />
+
+                                    <p id="err1_access"></p>
+                                </div>
+
+                                <div>
+                                    <input type="button" id="submit1" class="btn btn-primary mb-2" value="Click On Exam" onclick="show_rules()" disabled />
+                                </div>
+                            </form>
+
+                            <dialog id="rulesdialog1">
+                                <div>
+                                    <div>
+                                        <div>
+                                            <h3>** Rules and Regualtions</h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="list">
+                                        <ul>
+                                            <li>
+                                                The exam consisits of multiple choice questions.
+                                            </li>
+                                            <li>Each question is of 1 marks each.</li>
+                                            <li>Time limit :
+                                                <%=sql[0].exam_time%> minutes</li>
+                                            <li>
+                                                You cannot access the exam once the time is over.
+                                            </li>
+                                            <li>
+                                                There will be questions from different categories.
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div>
+                                        <form action="/examPost" method="post">
+                                            <div class="form-check">
+                                                <input type="checkbox" id="check1" class="form-check-input" onchange="foo()" name="check" /><label for="check">I have read all
+                                                    above rules
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" id="check2" class="form-check-input" name="check" onchange="foo()" /><label for="check">I have ready to start the exam
+                                                </label>
+                                            </div>
+
+                                            <div>
+                                                <input type="reset" class="btn btn-primary mb-2" value="Cancel" onclick="close_dialog()" />
+                                                <input type="submit" id="submit" class="btn btn-primary mb-2" value="START EXAM" disabled />
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </dialog>
+                        </div>
+                    </center>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="/js/exam_list.js"></script>
+    <script>
+        function show_rules() {
+            var dialog = document.getElementById("rulesdialog1");
+            dialog.showModal();
+        }
+
+        function close_dialog() {
+            var dialog = document.getElementById("rulesdialog1");
+            dialog.close();
+        }
+    </script>
+
+
+</body>
+
+</html>

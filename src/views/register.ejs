@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | eSparkBiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+
+<body>
+    <section class="mainSection">
+        <div class="container">
+
+            <div class="rowSection">
+
+
+                <div class="columnF">
+                    <div class="divCard">
+                        <div class="imgDiv">
+                            <img src="/images/register3.jpg" alt="Sample photo" class="img-fluid" style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="columnS">
+                    <div class="divCard">
+
+                        <div class="allInputDiv">
+
+                            <div class="titleCenter">
+                                <h3 class="title">Register From</h3>
+                            </div>
+
+                            <form method="post" action="/register" onsubmit="return validateForm()">
+                                <div class="row">
+
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" id="box" onkeyup="return sameAll('name')" class="form-control form-control-lg" placeholder="First Name" name="fname" required />
+                                            <p id="first_lable"></p>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" id="lname" onkeyup="return sameAll('last')" class="form-control form-control-lg" placeholder="Last Name" name="lname" required />
+                                            <p id="last_lable"></p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="cnumber" class="form-control form-control-lg" onkeyup="return sameAll('phone')" placeholder="Contact Number" name="phoneN" required />
+                                        <p id="phone_label"></p>
+                                    </div>
+
+
+
+
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="form3Example8" class="form-control form-control-lg" placeholder="Address" name="address" required />
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+                                        <label class="form-label" for="form3Example8">Collage : </label>
+                                        <select class="select" name="college" id="college" required>
+
+                                            <option value="" selected disabled>Select</option>
+                                            <% for(let k=0;k<collegeResult.length;k++){ %>
+                                                <option value="<%=collegeResult[k].college_id%>">
+                                                    <%=collegeResult[k].college_name%>
+                                                </option>
+                                                <% } %>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="">
+                                        <div class="col-md-6 mb-4">
+                                            <label class="form-label" for="form3Example8">State : </label>
+                                            <select class="select" name="state" id="state" onchange="city_select(this.value)" required>
+                                                <option value="" selected disabled>Select</option>
+                                                <% for(let i=0;i<stateResult.length;i++){ %>
+                                                    <option value="<%= stateResult[i].state_id %>">
+                                                        <%=stateResult[i].state_name %>
+                                                    </option>
+                                                    <% } %>
+
+                                            </select>
+
+                                        </div>
+
+                                        <div class="col-md-6 mb-4">
+                                            <label class="form-label" for="form3Example8">City : </label>
+                                            <select class="select" id="select_city" name="city" required>
+                                                <option value="1" selected disabled>Select</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+
+                                        <h6 class="mb-0 me-4">Gender: </h6>
+
+                                        <div class="form-check form-check-inline mb-0 me-4">
+                                            <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="Female" />
+                                            <label class="form-check-label" for="femaleGender">Female</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mb-0 me-4">
+                                            <input class="form-check-input" type="radio" name="gender" id="maleGender" value="Male" required />
+                                            <label class="form-check-label" for="maleGender">Male</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mb-0">
+                                            <input class="form-check-input" type="radio" name="gender" id="otherGender" value="Other" />
+                                            <label class="form-check-label" for="otherGender">Other</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input type="email" id="userEmail" class="form-control form-control-lg" onkeyup="sameAll('email')" onchange="valid_email(this.value)" placeholder="Email" name="email" />
+                                        <p id="email_valid"></p>
+                                        <p id="email_valid2"></p>
+
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input type="password" id="password" class="form-control form-control-lg" onkeyup="sameAll('psw')" placeholder="Password" name="password" required />
+                                        <p id="password_lable"></p>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input type="password" id="confirm" class="form-control form-control-lg" placeholder="Confirm Password" name="confirmPassword" />
+                                        <p id="confirm_lable"></p>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center pt-3">
+                                        <input type="reset" class="btn btn-light btn-lg" value="Reset All">
+                                        <input type="submit" id="submitAll" class="btn btn-warning btn-lg ms-2" value="Submit All">
+
+                                    </div>
+                                    <div class="d-flex justify-content-center pt-3">
+                                        <label for="">Do Have Account? <a href="/login"> Login Here </a></label>
+                                    </div>
+                            </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </section>
+</body>
+
+<script>
+    function validateForm() {
+        var password = document.getElementById("password").value;
+        var confirm = document.getElementById('confirm').value;
+        // console.log(password, confirm);
+
+        if (password != confirm) {
+            // alert("Please Enter Same Password In Both Input");
+            document.getElementById("confirm_lable").innerHTML = "Passwords does not match!"
+            document.getElementById("confirm_lable").style.color = "red"
+            return false;
+        } else if (password == confirm) {
+            return true;
+        }
+    }
+    let flag1 = 0;
+    let flag2 = 0;
+    let flag3 = 0;
+    let flag4 = 0;
+    let flag5 = 0;
+
+    function sameAll(filed) {
+        var name_arr = [];
+        var name_arr2 = [];
+
+        if (filed == "name") {
+
+            var n = document.getElementById("box").value;
+            var valid = new RegExp("[^a-z|^A-Z]");
+            if (valid.test(n)) {
+                name_arr.push("Name is not  contain any number or space")
+            }
+            if (name_arr.length > 0) {
+                document.getElementById('first_lable').innerHTML = name_arr.join("\n");
+                document.getElementById('first_lable').style.color = "red";
+                document.getElementById("submitAll").disabled = true;
+                flag1 = 1;
+
+            } else {
+                document.getElementById('first_lable').innerHTML = "";
+                flag1 = 0;
+
+            }
+
+        }
+        if (filed == "last") {
+
+            var last = document.getElementById("lname").value;
+            var valid = new RegExp("[^a-z|^A-Z]");
+            if (valid.test(last)) {
+                name_arr2.push("Name is not  contain any number or space")
+            }
+
+            if (name_arr2.length > 0) {
+                document.getElementById('last_lable').innerHTML = name_arr2.join("\n");
+                document.getElementById('last_lable').style.color = "red";
+                document.getElementById("submitAll").disabled = true;
+                flag2 = 1;
+
+            } else {
+                document.getElementById('last_lable').innerHTML = "";
+                flag2 = 0;
+
+            }
+
+        }
+
+        if (filed == "phone") {
+            var phoneValue = document.getElementById("cnumber").value;
+            var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+            var phone_arr = [];
+            if (re.test(phoneValue)) {
+                phone_arr.push("pelese enter valid phone number")
+            }
+            if (phone_arr.length == 0) {
+                document.getElementById('phone_label').innerHTML = "pelese enter valid phone number";
+                document.getElementById('phone_label').style.color = "red";
+                document.getElementById("submitAll").disabled = true;
+                flag3 = 1;
+            } else {
+                document.getElementById('phone_label').innerHTML = "";
+
+                flag3 = 0;
+            }
+        }
+
+        if (filed == "email") {
+            var emailValue = document.getElementById("userEmail").value;
+            let e1 = emailValue.indexOf("@");
+            let e2 = emailValue.lastIndexOf(".");
+            var errEmail = [];
+            if (emailValue) {
+                if (e1 < 2) {
+                    errEmail.push("@ is write after two point")
+                }
+                if (e2 < e1 + 2) {
+                    errEmail.push(".(Dot)  enter two point after @. ")
+                }
+                if (e2 + 2 >= emailValue.length) {
+                    errEmail.push("Plese enter valid email")
+                }
+            }
+
+            if (errEmail.length > 0) {
+
+                document.getElementById("email_valid").innerHTML = "Plese eneter the valid emnail";
+                document.getElementById("email_valid").style.color = "red";
+                document.getElementById("submitAll").disabled = true;
+                flag4 = 1;
+            } else {
+                document.getElementById("email_valid").innerHTML = ""
+
+                flag4 = 0;
+            }
+        }
+
+        if (filed == "psw") {
+            var password = document.getElementById("password").value
+            const errors = [];
+            if (password.length == 0) {
+                document.getElementById("password_lable").innerHTML = ""
+            } else {
+                if (password.length < 3) {
+                    errors.push("Your password must be at least 3 characters");
+                }
+                if (password.search(/[a-z]/) < 0) {
+                    errors.push("Your password must contain at least one lower case letter.");
+                }
+                if (password.search(/[0-9]/) < 0) {
+                    errors.push("Your password must contain at least one digit.");
+                }
+                if (password.search(/[!@#\$%\^&\*_]/) < 0) {
+                    errors.push("Your password must contain at least special char from -[ ! @ # $ % ^ & * _ ]");
+                }
+                if (password.length > 10) {
+                    errors.push("Your password must be at max 10 characters");
+                }
+            }
+
+            if (errors.length > 0) {
+
+                document.getElementById("password_lable").innerHTML = errors.join("\n");
+                document.getElementById("password_lable").style.color = "red";
+                document.getElementById("submitAll").disabled = true;
+                flag5 = 1;
+            } else {
+                document.getElementById("password_lable").innerHTML = ""
+                flag5 = 0;
+            }
+        }
+
+
+        if (flag1 == 0 && flag2 == 0 && flag3 == 0 && flag4 == 0 && flag5 == 0) {
+            document.getElementById("submitAll").disabled = false;
+        }
+    }
+
+
+
+
+    function validPass(password) {
+
+    }
+
+
+
+
+    var select_city = document.getElementById('select_city');
+
+    async function city_select(state) {
+        // console.log("viren ", state)
+        fetch(`/city?state=${state}`, {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+            .then(data => {
+                select_city.innerHTML = "";
+                // console.log(data);
+
+                for (let i = 0; i < data.result9.length; i++) {
+                    const option = document.createElement('option');
+
+                    option.value = data.result9[i].city_name;
+                    option.text = data.result9[i].city_name;
+
+                    select_city.appendChild(option);
+                }
+
+            })
+    }
+
+
+
+    async function valid_email(email1) {
+        let emailValid = await fetch('/valid1', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email1
+            })
+        })
+
+        let nameData1 = await emailValid.json();
+
+        if (nameData1.status == 404) {
+            document.getElementById("email_valid2").innerHTML = "This email id is already use."
+            document.getElementById("email_valid2").style.color = "red";
+            document.getElementById("submitAll").disabled = true;
+        } else {
+            document.getElementById("email_valid2").innerHTML = ""
+
+        }
+    }
+</script>
+
+</html>

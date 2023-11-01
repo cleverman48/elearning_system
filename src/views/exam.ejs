@@ -1,0 +1,187 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam </title>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <!-- Font Awesome CSS -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/examejs.js"></script>
+
+    <link rel="stylesheet" href="/exam.css">
+
+</head>
+
+<body>
+    <div class="site-page">
+        <header>
+            <nav class="navbar navbar-expand-lg " id="navbar1">
+                <div class="container-fluid">
+                    <a class="navbar-brand">Online Examination System</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+
+                    <div class="d-flex" id="navbarNav">
+                        <ul class="navbar-nav">
+
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Welcome Naresh</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="bod-page">
+
+            <section class="section-1">
+                <h1>Welcome Naresh </h1>
+                <div class="text-end">
+
+                    <span onclick="timer('10')">Time Left :</span>
+
+                    <p id="time1" class="badge rounded-pill text-bg-primary timer1">time</p>
+
+                </div>
+                <div class="container1">
+                    <div class="row1">
+                        <div class="column1">
+                            <%-include('exam_question')%>
+                        </div>
+                        <div class="column2">
+                            <div class="card border-primary mb-3" style="max-width: 18rem;">
+
+                                <div class="card-body text-primary">
+                                    <div class="row2">
+                                        <div class="column3">
+                                            <div class="box1">1</div>
+                                        </div>
+                                        <div class="column3">
+                                            <div class="box1">1</div>
+                                        </div>
+                                        <div class="column3">
+                                            <div class="box1">1</div>
+                                        </div>
+                                        <div class="column3">
+                                            <div class="box1">1</div>
+                                        </div>
+                                        <div class="column3">
+                                            <div class="box1">1</div>
+                                        </div>
+                                        <div class="column3">
+                                            <div class="box1">1</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <script src="/examejs.js"></script>
+            </section>
+        </div>
+        <footer></footer>
+    </div>
+</body>
+<script>
+    function popupClick() {
+        var divParent = document.getElementById("addPop");
+        // var popupProfile = document.getElementById("profilePopup");
+        var spanC = document.createElement("span");
+        spanC.classList.add("popuptext")
+        spanC.classList.toggle("show");
+        spanC.innerHTML = "Profile Update Complete!"
+
+        document.getElementById("addPop").appendChild(spanC)
+        const myTimeout = setTimeout(callLogin, 2000);
+
+        function callLogin() {
+            spanC.remove()
+        }
+
+    }
+
+    async function validateProfilePaw() {
+
+        var old_pass = document.getElementById("old_pass").value;
+        var save_pass = document.getElementById("save_pass").value;
+        var save_confirm = document.getElementById("save_confirm").value;
+        var err_old = document.getElementById("err_old");
+        var err_new = document.getElementById("err_new");
+        var err_confirm = document.getElementById("err_confirm");
+
+
+        var profileFetch = await fetch('/profilePassword', {
+
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    old_pass,
+                    save_pass,
+                    save_confirm
+                })
+            }).then(res => res.json())
+            .then(data => {
+                if (data.text == "wrong") {
+                    err_old.innerHTML = 'Password Does Not Match'
+                    err_new.innerHTML = ""
+                    err_confirm.innerHTML = ""
+                }
+                if (data.text == "blank") {
+                    err_new.innerHTML = "Plese Fill the data"
+                    err_old.innerHTML = ''
+                    err_confirm.innerHTML = ""
+
+                }
+                if (data.text == "empty") {
+                    err_confirm.innerHTML = "Plese Fill the data"
+                    err_old.innerHTML = ''
+                    err_new.innerHTML = ""
+
+                }
+                if (data.text == "notMatch") {
+                    err_confirm.innerHTML = "Enter Same Password"
+                    err_old.innerHTML = ''
+                    err_new.innerHTML = ""
+                }
+                if (data.text == "success") {
+                    // location.assign("/login")
+                    // alert("password changed successfully")
+                    var popup = document.getElementById("myPopup");
+                    popup.classList.toggle("show");
+                    const myTimeout = setTimeout(callLogin, 2000);
+
+                    function callLogin() {
+                        location.assign("/login")
+                    }
+                }
+
+            })
+    }
+</script>
+
+</html>

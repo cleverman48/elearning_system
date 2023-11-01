@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test pages</title>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        /* Set height of body and the document to 100% */
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial;
+        }
+
+        .top {
+            display: flex;
+            justify-content: center;
+            width: 100vw;
+            height: auto;
+        }
+
+        .exam {
+            height: auto;
+            background-color: rgb(154, 247, 255);
+            width: 90%;
+        }
+
+        .exam_top {
+            display: flex;
+            justify-content: center;
+            width: 100vw;
+            height: auto;
+        }
+
+        /* Style tab links */
+        .bg {
+            background-color: rgb(234, 233, 233);
+            height: auto;
+            padding: 10px;
+        }
+
+        .che {
+            opacity: 2;
+            cursor: not-allowed;
+            width: 18px;
+            height: 18px;
+        }
+        #exam_bg
+        {
+            display: flex;
+            justify-content: center;
+            padding: auto;
+            width: 100vw;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jitbit/HtmlSanitizer@master/HtmlSanitizer.js"></script>
+</head>
+
+<body>
+    <%- include('header') -%>
+        <div class="top">
+            <div class="info  m-2 container justify-content-center">
+                <div class="row text-center fs-5">
+                    <div class="col-sm-6 bg-success text-white">テーマ:<%= theme_info.theme_name %>
+                    </div>
+                    <div class="col-sm-3 text-white bg-success ">実施期間:&nbsp&nbsp&nbsp<%= theme_info.start_date %>&nbspから
+                    </div>
+                    <div class="col-sm-3 text-white bg-success ">
+                        <%= theme_info.end_date %>&nbspまで
+                    </div>
+                </div>
+                <div class="row text-center fs-5">
+                    <div class="col-sm-6 bg-warning" style="display: flex;justify-content: space-evenly;">
+                        複数回の試験を許可:
+                        <% if(theme_info.check_moretime==1) { %>
+                            <input type="checkbox" checked class="m-2 che">
+                        <% }else{ %> <input type="checkbox" class="m-2 che">
+                        <% } %>
+                        &nbsp&nbsp&nbspテスト実施可能回数: &nbsp&nbsp<div id="pn"><%= theme_info.possible_number %></div>
+                    </div>
+                    <div class="col-sm-3 bg-info">点数: <%= theme_info.marks %>
+                    </div>
+                    <div class="col-sm-3 bg-warning">正解を表示: <% if(theme_info.check_answer==1){ %>
+                            <input type="checkbox" checked class="che">
+                            <% }else{ %> <input type="checkbox" class="che">
+                                <% } %>
+                    </div>
+                </div>
+                <div class="row text-center fs-5">
+                    <div class="col-sm-9 bg-warning">制限時間: <% if(theme_info.check_limit_time==1) {%>
+                            <input type="checkbox" checked class="che">
+                            <% }else{ %> <input type="checkbox" class="che">
+                                <% } %>
+                                    &nbsp&nbsp&nbsp<%= theme_info.limit_time %>分
+                    </div>
+                    <div class="col-sm-3 bg-warning">自動提出を無力にする: <% if(theme_info.check_unuse_make==1) {%>
+                            <input type="checkbox" checked class="che">
+                            <% }else{ %> <input type="checkbox" class="che">
+                                <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="exam_top">
+            <div class="exam text-center container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <button type="button" class="btn btn-success w-100 m-2" onclick="startExam()">テスト開始</button>
+                    </div>
+                    <div class="col-sm-9">
+                        <progress class="w-100 h-80 p-4" id="myProgress" value="0" max="100"></progress>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id = "exam_bg"></div>
+        <div id = "id"><%= JSON.stringify(theme_info) %></div>
+        <%- include('footer') -%>
+        <script>
+            var exam_top = document.getElementById("exam_bg");
+            var dddd = document.getElementById("id");
+            dddd.style.display = "none";
+            const theme_info = JSON.parse(dddd.innerHTML);
+            var step = 0;
+            var progress = 0;
+            var progressBar = document.getElementById("myProgress");
+            var possible_number = 1;
+            if(theme_info.check_moretime==1) possible_number = theme_info.possible_number;
+            function startExam() 
+            {
+                if(possible_number==0)
+                {
+                    alert("you cann't start again!")
+                    return;
+                }
+                if (theme_info.check_limit_time == 1) {
+                    makeExam();
+                    step = 100/(theme_info.limit_time * 60);
+                    var interval = setInterval(function () {
+                        progressBar.value = progress;
+                        progress += step;
+                        if (progress >= 100) {
+                            clearInterval(interval);
+                            possible_number-=1;
+                            document.getElementById("pn").innerHTML = possible_number;
+                        }
+                    }, 1000);
+                }
+
+            }
+            function makeExam()
+            {
+                var test_data = JSON.parse(theme_info.test_data);
+                var html = "";
+                for(var i=0; i<test_data.length;i++)
+                {
+                    var problem = "<div class='container  border border-2  m-2 p-2'>";
+                    var type = test_data[i].type;
+                    problem +="<div class='row  fs-sm p-2'>フォーマット:&nbsp&nbsp"+type+"</div>";
+                    problem +="<div class='row  fs-sm p-2'>"+"番号:"+(i+1)+"&nbsp&nbsp"+test_data[i].query+"&nbsp&nbsp&nbsp&nbsp スコア:&nbsp&nbsp&nbsp&nbsp"+test_data[i].marks+"</div>";
+                    var temp_html=HtmlSanitizer.SanitizeHtml(test_data[i].query_sentences);                  
+                    problem +="<div class='row  fs-sm p-2'>"+temp_html+"</div>";
+                   
+                    if(type=="複数選択")
+                    {
+                        let pa = test_data[i].possible_answers;
+                        for(let j=0;j<pa.length;j++)
+                        {
+                            problem += "<div class='row'><input class='col-sm-1 p-2 m-1' data-type='複数選択' type='radio' name='"+test_data[i].test_id+"' value='"+pa[j]+"'>"+pa[j]+"</div>";
+                        }                       
+                    }
+                    else if(type=="真/偽")
+                    {
+                        let pa = test_data[i].possible_answers;
+                        for(let j=0;j<pa.length;j++)
+                        {
+                            problem += "<div class='row'><input class='col-sm-1 p-2 m-1' data-type='真/偽' type='radio' name='"+test_data[i].test_id+"' value='"+pa[j]+"'>"+pa[j]+"</div>";
+                        }       
+                    }
+                    else if(type=="穴埋め")
+                    {
+                        problem += "<div class='row p-2'><input class='col-sm-2 p-2 m-1' data-type='穴埋め' type='text' name='"+test_data[i].test_id+"' > : answer </div>";
+                    }
+                    else if(type=="複数穴埋め")
+                    {
+                        let pa = test_data[i].true_answers;
+                        for(let j=0;j<pa.length;j++)
+                        {
+                            problem += "<div class='row p-2'><input class='col-sm-2 p-2 m-1' data-type='複数穴埋め' type='text' name='"+test_data[i].test_id+"' > :answer"+(j+1)+" </div>";
+                        } 
+                    }
+                    else if(type=="複数回答")
+                    {
+                        let pa = test_data[i].possible_answers;
+                        for(let j=0;j<pa.length;j++)
+                        {
+                            problem += "<div class='row' id='"+test_data[i].test_id+"'><input class='col-sm-1 p-2 m-1' data-type='複数回答' type='checkbox'  id='"+test_data[i].test_id+"-"+(j+1)+"' value='"+pa[j]+"'><div class='col-sm-4'>"+pa[j]+"</div></div>";
+                        }  
+                    }
+                    else if(type=="複数ドロップダウン")
+                    {
+                        let ta = test_data[i].true_answers;
+                        for(let k=0;k<ta.length;k++)
+                        {
+                            let pa = test_data[i].possible_answers;
+                            problem+="<div class='row'><select class='col-sm-3 w-30 p-2 m-2' id='"+test_data[i].test_id+"'>";
+                            for(let j=0;j<pa.length;j++)
+                            {
+                                problem+=" <option value='"+pa[j]+"''>"+pa[j]+"</option>";
+                            }
+                            problem+="</select></div>";
+                        }  
+                    }
+                    else if(type=="整合")
+                    {
+                        let ta = test_data[i].true_answers;
+                        for(let k=0;k<ta.length;k++)
+                        {
+                            let pa = test_data[i].possible_answers;
+                            problem+="<div class='row'><select class='col-sm-3 w-30 p-2 m-2' id='"+test_data[i].test_id+"'>";
+                            for(let j=0;j<pa.length;j++)
+                            {
+                                problem+=" <option value='"+pa[j]+"''>"+pa[j]+"</option>";
+                            }
+                            problem+="</select></div>";
+                        }  
+                    }
+                    else if(type=="数値による解答")
+                    {
+                        problem += "<div class='row p-2'><input class='col-sm-2 p-2 m-1' data-type='数値による解答' type='text' name='"+test_data[i].test_id+"' > : answer </div>";
+                    }
+                    else if(type=="数式問題")
+                    {
+                        problem += "<div class='row p-2'><input class='col-sm-2 p-2 m-1' data-type='数式問題' type='text' name='"+test_data[i].test_id+"' > : answer </div>";
+                    }
+                    else if(type=="小論文問題")
+                    {
+                        problem+="<textarea class='row p-2 m-2' data-type='小論文問題' id='"+test_data[i].test_id+"' rows='4' cols='50'></textarea>";
+                    }
+                    else if(type=="ファイルアップロード問題")
+                    {
+                        problem += "<div class='row p-2'><input class='col-sm-6 p-2 m-1' data-type='ファイルアップロード問題' type='file' name='"+test_data[i].test_id+"' > </div>";
+                    }
+                    problem+="</div>";
+                    html+=problem;
+                }
+                html+="<div class='container  border border-2  m-2 p-2'><input type='button' class='col-sm-3' value='endExam' onclick='endExam()'></div>";
+                exam_top.innerHTML=html;
+            }
+        </script>
+</body>
+
+</html>

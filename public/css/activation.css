@@ -1,0 +1,71 @@
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.rowSection {
+    display: flex;
+    flex-direction: row;
+    box-shadow: 1px 1px 5px black;
+    margin: 50px;
+}
+
+.columnF {
+    width: 55%;
+}
+
+.columnS {
+    width: 45%;
+}
+
+.allInputDiv {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px;
+}
+
+.boxRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.passDivRember {
+    width: 55%;
+}
+
+.passDivForget {
+    width: 45%;
+    display: flex;
+    justify-content: end;
+}
+
+
+/* .allInputDiv {
+    padding-top: 100px;
+} */
+
+.titleCenter {
+    text-align: center;
+}
+
+.titleCenter h3 {
+    font-size: 40px;
+}
+
+
+/* .imgDiv {
+    padding: 30px;
+} */
+
+.imgDiv img {
+    width: 100%;
+    height: 880px;
+    padding: 30px;
+    padding-top: 70px;
+}
+
+.bodypage {
+    text-align: center;
+    margin-top: 50%;
+}

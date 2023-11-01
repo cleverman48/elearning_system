@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test pages</title>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        /* Set height of body and the document to 100% */
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial;
+        }
+
+        /* Style tab links */
+        .bg {
+            background-color: rgb(234, 233, 233);
+            height: auto;
+            padding: 10px;
+        }
+
+        .tablink {
+            background-color: rgb(234, 233, 233);
+            color: black;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            font-size: 17px;
+            width: 10%;
+            margin: 5px;
+            margin-bottom: 0px;
+        }
+
+        .tabbar {
+            display: flex;
+            justify-content: left;
+            width: 100%;
+        }
+
+        .tablink:hover {
+            color: rgb(242, 11, 11);
+        }
+
+        /* Style the tab content (and add height:100% for full page content) */
+        .tabcontent {
+            color: black;
+            height: 100%;
+            display: none;
+        }
+
+        #test_list {
+            background-color: rgb(222, 247, 254);
+            padding: 20px;
+        }
+
+        #theme_list {
+            background-color: rgb(222, 247, 254);
+            padding: 20px;
+
+        }
+
+        table {
+            text-align: center;
+        }
+
+        .newThemebt {
+            padding: 5px;
+            margin-bottom: 10px;
+            margin-right: 40px;
+            color: white;
+            background-color: royalblue;
+            font-size: 15px;
+            height: 40px;
+            width: 100px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .newThemebt:hover {
+            color: yellow;
+        }
+
+        .newbtdiv {
+            display: flex;
+            justify-content: right;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+    <%- include('header') -%>
+    <div id="test_list" >
+        <table class="table table-bordered">
+            <thead style="background-color: rgb(231, 195, 94);">
+                <tr>
+                    <th>テーマ名</th>
+                    <th>アイコン</th>
+                    <th>実施期間</th>
+                    <th>実施人数</th>
+                    <th>完了人数</th>
+                    <th>最終更新日</th>
+                    <th>詳細</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0;i<test_list.length;i++) { %>
+                    <tr>
+                        <td>
+                            <%= test_list[i].theme_name %>
+                        </td>
+                        <td> 
+                            <img src=<%= test_list[i].image %> width="50" height="70">
+                        </td>
+                        <td>
+                            <%= test_list[i].start_date %> ~ <%= test_list[i].end_date %>
+                        </td>
+                        <td>
+                            100
+                        </td>
+                        <td>
+                            80
+                        </td>
+                        <td>
+                            <%= test_list[i].last_update_date %>
+                        </td>
+                        <td><button onclick="openTestDetail('<%= test_list[i].theme_id %>')">詳細</button></td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
+    <%- include('footer') -%>
+    <script>
+        function openTestDetail(id) {
+            location.replace("/enterexam?id="+id);
+        }       
+    </script>
+</body>
+
+</html>

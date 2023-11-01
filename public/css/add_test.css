@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box
+}
+
+/* Set height of body and the document to 100% */
+body,
+html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial;
+    padding: auto;
+    align-items: center;
+}
+
+input,
+select {
+    border-radius: 5px;
+    border-style: solid;
+    border: 1pc;
+    border-color: #aeaeae;
+    font-size: 20px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 10px;
+    padding: auto;
+}
+#first_editor,
+#second_editor{
+    display: flex;
+    justify-content:space-around;
+    text-align: left;
+    margin-right: 5px;
+    width: 99%;
+}
+
+/* Style tab links */
+.content {
+    display: block;
+    justify-content: center;
+    text-align: center;
+}
+
+.bg {
+    background-color: rgb(200, 223, 236);
+    height: auto;
+    margin: 10px;
+    width: 100%;
+}
+
+.empty {
+    background-color: transparent;
+    border-style: none;
+    margin: 10px;
+}
+
+.row_100 {
+    width: 100%;
+    height: auto;
+    margin: 20px;
+}
+
+#webix_toolbar {
+    background-color: rgb(202, 201, 200);
+}
+
+#webix_info {
+    background-color: rgb(227, 236, 236);
+    padding: 10px;
+
+}
+
+.info {
+    color: white;
+    font-size: 30px;
+}
+
+.component {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin: 5px;
+    width: auto;
+    height: 40px;
+}
+
+.delete {
+    float: inline-end;
+    cursor: pointer;
+    font-size: 20px;
+    color: red;
+}
+.table
+{
+    display: inline-flex;
+    width: 95%;
+    height: auto;
+    background-color:rgb(200, 223, 236);
+}

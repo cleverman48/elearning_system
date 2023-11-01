@@ -1,0 +1,213 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #fcfcfc;
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    color: black;
+}
+
+.heading1 {
+    font-size: 4rem;
+}
+
+.para1 {
+    font-size: 1.5rem;
+}
+
+.btn-exm {
+    width: 25%;
+}
+
+.img-circle {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.margintop-100 {
+    margin-top: 100px;
+
+}
+
+.margintop-50 {
+    margin-top: 50px;
+
+}
+
+.border {
+    border: 1px solid black;
+}
+
+.padding-20 {
+    padding: 20px;
+}
+
+.padding-10 {
+    padding: 10px;
+}
+
+/* /Profile Card Css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif
+}
+
+.card1 {
+    height: 470px;
+    overflow: hidden
+}
+
+.card1 .info {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card1 .forms {
+    padding: 15px
+}
+
+.card1 .inputs {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px
+}
+
+.card1 .inputs span {
+    font-size: 12px
+}
+
+.card1 .inputs input {
+    height: 40px;
+    padding: 0px 10px;
+    font-size: 17px;
+    box-shadow: none;
+    outline: none
+}
+
+.card1 .inputs input[type="text"][readonly] {
+    border: 2px solid rgba(0, 0, 0, 0)
+}
+
+.gap-50 {
+    gap: 10px 50px;
+}
+
+.padd-4 {
+    height: 70px;
+    width: 70px;
+}
+
+.t-30px {
+    font-size: 30px;
+}
+
+.t-14px {
+    font-size: 14px;
+}
+
+.bg-aqva {
+    background-color: rgb(232, 237, 241);
+}
+
+.gap-20 {
+    gap: 20px;
+}
+
+.padd-2 {
+    height: 40px;
+    width: 40px;
+}
+
+.modal1 {
+    display: block !important;
+}
+
+.modal1-dialog {
+    overflow-y: initial !important
+}
+
+.modal1-body {
+    height: 250px;
+    overflow-y: auto;
+}
+
+
+.genders {
+    padding-top: 20px;
+
+}
+
+.genders label {
+    padding-top: 0px;
+    padding-left: 32px;
+    padding-right: 5px;
+}
+
+
+/* body {
+    
+ 
+   
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    color: #000;
+} */
+
+.container {
+    text-align: center;
+    /* border: 2px solid red; */
+    /* position: absolute; */
+
+    padding: 100px;
+    margin: 0 auto;
+
+}
+
+.bg-body-tertiary {
+    --bs-bg-opacity: 1;
+    background-color: #ffc107;
+}
+
+
+
+
+.exam_form {
+    /* border: 2px solid white; */
+    width: 50%;
+    /* border-radius: 10px; */
+    /* box-shadow: 5px 10px 18px rgb(148, 141, 141); */
+}
+
+.form-input {
+    margin: 10 0px;
+}
+
+#navbar1 {
+    background-color: #ffc107;
+}
+
+#rulesdialog1 {
+    border: none;
+    text-align: left;
+    padding: 70px;
+    /* border: 2px solid white; */
+    color: dimgray;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 5px 10px 18px rgb(148, 141, 141);
+}
+
+
+/* .list_rules{
+   
+
+} */
